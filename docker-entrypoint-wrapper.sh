@@ -12,8 +12,8 @@ export ZOO_MY_ID
 # did we set all ifaces?
 if [[ "$ZOO_SERVER_ALL_IFACES" == "1" ]]; then
   # substitute the ZOO_SERVERS entry for my server with 0.0.0.0
-  HOSTNAME=$(hostname)
-  ZOO_SERVERS="${ZOO_SERVERS/$HOSTNAME/0.0.0.0}"
+  shopt -s extglob
+  ZOO_SERVERS="${ZOO_SERVERS/server.${ZOO_MY_ID}=+([^:]):/server.${ZOO_MY_ID}=0.0.0.0:}"
 fi
 
 /docker-entrypoint.sh $@

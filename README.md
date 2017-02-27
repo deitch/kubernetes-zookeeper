@@ -91,4 +91,4 @@ ZOO_SERVERS=server.0=zk-0:2888:3888 server.1=zk-1:2888:3888 server.2=zk-2:2888:3
 
 then `server.0` will bind for _clients_ on all interfaces at `2181` but for leader election on `zk-0:3888`. Sometimes this is fine; sometimes you want it to bind on all interfaces there too!
 
-To set it to bind on all interfaces (the usual situation in a container), or if your servername is not yet DNS resolvable, set the env var `ZOO_SERVER_ALL_IFACES=1`.
+To set it to bind on all interfaces (the usual situation in a container), or if your own servername is not yet DNS resolvable, set the env var `ZOO_SERVER_ALL_IFACES=1`.
