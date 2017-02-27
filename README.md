@@ -83,3 +83,12 @@ spec:
           value: server.0=zk-0:2888:3888 server.1=zk-1:2888:3888 server.2=zk-2:2888:3888
 ```
 
+In addition, zookeeper normally listens as server and election on ports `2888` and `3888` (or whatever you config in `ZOO_SERVERS`). However, it only listens on the port specified in the entry for that file. So if you have:
+
+```
+ZOO_SERVERS=server.0=zk-0:2888:3888 server.1=zk-1:2888:3888 server.2=zk-2:2888:3888
+```
+
+then `server.0` will bind for _clients_ on all interfaces at `2181` but for leader election on `zk-0:3888`. Sometimes this is fine; sometimes you want it to bind on all interfaces there too!
+
+To set it to bind on all interfaces (the usual situation in a container), or if your servername is not yet DNS resolvable, set the env var `ZOO_SERVER_ALL_IFACES=1`.
